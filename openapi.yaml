@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: Botanical Gardens Service API
+  version: 1.0.0
+  description: Service-oriented system for botanical gardens' cartography and educational information.
+  contact:
+    name: Andrei Mosor and Adrian-Constantin Smau
+    email: mosorandrei49@gmail.com
+paths:
+  /botanical-gardens:
+    get:
+      summary: Get a list of botanical gardens
+      responses:
+        '200':
+          description: A list of botanical gardens
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Botanical Garden 1
+                - id: 2
+                  name: Botanical Garden 2
+
+  /botanical-gardens/{garden_id}:
+    get:
+      summary: Get information about a specific botanical garden
+      parameters:
+        - name: garden_id
+          in: path
+          description: The ID of the selected botanical garden
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Information about the selected botanical garden
+          content:
+            application/json:
+              example:
+                id: 1
+                name: Botanical Garden 1
+                attractions:
+                  - id: 301
+                    name: Rose Garden
+                    type: Flower
+                    description: Collection of various rose varieties
+                  - id: 302
+                    name: Oak Grove
+                    type: Tree
+                    description: Diverse collection of oak trees
+                map:
+                  image_url: /garden1/map
+
+  /tours:
+    get:
+      summary: Get a list of available tours
+      responses:
+        '200':
+          description: List of available tours
+          content:
+            application/json:
+              example:
+                - id: 201
+                  name: Spring Garden Tour
+                  description: Explore the beauty of springtime in the botanical gardens.
+                  attractions:
+                    - id: 301
+                      name: Rose Garden
+                    - id: 302
+                      name: Oak Grove
+                - id: 202
+                  name: Taxonomy Tour
+                  description: Learn about plant classification.
+                  attractions:
+                    - id: 301
+                      name: Rose Garden
+
+  /tours/{tour_id}:
+    get:
+      summary: Get information about a specific tour
+      parameters:
+        - name: tour_id
+          in: path
+          description: The ID of the selected tour
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Information about the selected tour
+          content:
+            application/json:
+              example:
+                id: 201
+                name: Spring Garden Tour
+                description: Explore the beauty of springtime in the botanical gardens.
+                attractions:
+                  - id: 301
+                    name: Rose Garden
+                  - id: 302
+                    name: Oak Grove
+
+  /attractions/{attraction_id}:
+    get:
+      summary: Get information about a specific attraction
+      parameters:
+        - name: attraction_id
+          in: path
+          description: The ID of the selected attraction
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Information about the selected attraction
+          content:
+            application/json:
+              example:
+                id: 301
+                name: Rose Garden
+                type: Flower
+                description: Collection of various rose varieties
+
+  /comments:
+    get:
+      summary: Get comments for a specific item (tour, attraction)
+      parameters:
+        - name: item_id
+          in: query
+          description: The ID of the item (tour or attraction)
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comments for the item
+          content:
+            application/json:
+              example:
+                - user: User1
+                  comment: This tour was amazing!
+                - user: User2
+                  comment: The Rose Garden is my favorite spot in the garden.
+
+    post:
+      summary: Add a new comment to a tour or attraction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              item_id: 201
+              comment: This tour was amazing!
+      responses:
+        '201':
+          description: Comment added successfully
+        '400':
+          description: Comments can only be added to tours or attractions
