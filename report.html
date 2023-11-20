@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Report: Botanical Gardens Application Development</title>
+</head>
+<body>
+    <article>
+        <header>
+            <h1>Technical Report: Botanical Gardens Application Development</h1>
+        </header>
+
+        <section>
+            <h2>Introduction</h2>
+            <p>This technical report outlines key considerations and external data sources for the development of a web application focused on botanical gardens, as per the provided OpenAPI specification.</p>
+        </section>
+
+        <section>
+            <h2>Initial Internal Data Structures/Models</h2>
+            <ul>
+                <li>User</li>
+                <ol>
+                    <li>First Name</li>
+                    <li>Last Name</li>
+                    <li>Email</li>
+                    <li>Password</li>
+                </ol>
+                <li>Botanical Garden</li>
+                <ol>
+                    <li>Garden ID</li>
+                    <li>Name</li>
+                    <li>Attractions (List of Attractions)</li>
+                </ol>
+                <li>Attraction</li>
+                <ol>
+                    <li>Attraction ID</li>
+                    <li>Name</li>
+                    <li>Type (e.g., Flower, Tree)</li>
+                    <li>Description</li>
+                    <li>Comments (List of Comments)</li>
+                </ol>
+                <li>Tour</li>
+                <ol>
+                    <li>Tour ID</li>
+                    <li>Name</li>
+                    <li>Description</li>
+                    <li>Attractions (List of Attractions)</li>
+                    <li>Comments (List of Comments)</li>
+                </ol>
+                <li>Comment</li>
+                <ol>
+                    <li>User</li>
+                    <li>Comment type (e.g., text, image)</li>
+                    <li>Comment content</li>
+                </ol>
+            </ul>
+        </section>
+
+        <section>
+            <h2>External Data Sources to look into</h2>
+            <ol>
+                <li>SPARQL Endpoint: Botanical information, taxonomy data, etc.</li>
+                <li>Mapping Service: Garden maps (e.g., Google Maps API)</li>
+                <li>Media Content Storage: Images and media content (e.g., AWS S3)</li>
+                <li>Weather API: Real-time weather information</li>
+                <li>Plant Identification API: Identify plant species through images</li>
+                <li>Social Media APIs: Integration with platforms like Instagram, Twitter</li>
+                <li>Geolocation Services: Enhance location-based services (e.g., Google Maps Geocoding API)</li>
+                <li>Environmental Data APIs: Air quality, pollution levels, etc.</li>
+                <li>Educational Content APIs: Additional information about plant species and botanical sciences</li>
+                <li>Events Calendar API: Upcoming activities, workshops, exhibitions</li>
+                <li>Traffic and Transportation APIs: Real-time traffic and transportation information</li>
+                <li>Local Business Directories: Nearby restaurants, cafes, services</li>
+                <li>Botanical Research Databases: Specific to botanical research and taxonomy</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Preliminary Application Considerations</h2>
+            <ul>
+                <li>User Authentication</li>
+                <li>Web Frontend (e.g., React, Vue.js)</li>
+                <li>Backend Server</li>
+                <li>Database (e.g., PostgreSQL, MongoDB)</li>
+                <li>Caching Mechanisms</li>
+                <li>Error Handling</li>
+                <li>Testing (Unit tests, Integration tests)</li>
+                <li>Documentation</li>
+                <li>Scalability</li>
+                <li>Security (Input validation)</li>
+                <li>Deployment (Cloud platform, On-premises)</li>
+                <li>Monitoring and Analytics</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Linked Data Principles in the Botanical Gardens Application</h2>
+
+            <p>The development of the Botanical Gardens Application adheres to the Linked Data principles, fostering a more interconnected and discoverable web of botanical information. Here's how the application aligns with each principle:</p>
+
+            <ol>
+                <li>
+                    <strong>Use URIs as Names for Things:</strong>
+                    <p>The application assigns unique URIs to each botanical garden, attraction, tour, and comment, ensuring global identification and persistence.</p>
+                </li>
+                <li>
+                    <strong>Use HTTP URIs:</strong>
+                    <p>All URIs in the application use the HTTP protocol, allowing them to be dereferenced to retrieve information about the identified resource directly.</p>
+                </li>
+                <li>
+                    <strong>Provide Useful Information Using Standardized Formats (e.g., RDF):</strong>
+                    <p>The application provides information in RDF, a standardized and machine-readable format, enhancing the flexibility and extensibility of data representation.</p>
+                </li>
+                <li>
+                    <strong>Include Links to Other URIs:</strong>
+                    <p>Within the data, the application incorporates links to related URIs, creating a network of interconnected botanical information. Users and applications can navigate seamlessly between resources.</p>
+                </li>
+                <li>
+                    <strong>Link to Other Data Sources:</strong>
+                    <p>The application extends beyond its own dataset by linking to external data sources, contributing to the creation of a decentralized and distributed web of interlinked botanical data.</p>
+                </li>
+            </ol>
+            
+            <p>By aligning with these Linked Data principles, the Botanical Gardens Application promotes a more open, interconnected, and accessible platform for botanical information, enriching the experience for users and encouraging collaboration with external data providers.</p>
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>The development of the Botanical Gardens Application involves a comprehensive approach, incorporating internal data structures/models, and integrating various external data sources to enhance user experience and functionality.</p>
+        </section>
+    </article>
+</body>
+</html>
