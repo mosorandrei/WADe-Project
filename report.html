@@ -36,7 +36,7 @@
                 The Botanical Gardens Application Development project aims to create a robust and feature-rich web application dedicated to the exploration and education of botanical gardens. This technical report outlines key considerations, internal data structures, external data sources, and the overarching architecture that defines the application's scope and functionality.
             </p>
             <p>
-                With a focus on user engagement and educational enrichment, the application leverages a comprehensive set of internal data models. These include user profiles for personalized experiences, botanical garden structures with attractions and tours, detailed attraction profiles encompassing user-generated comments, and a versatile commenting system to enhance user interaction.
+                With a focus on user engagement and educational enrichment, the application leverages a comprehensive set of internal data models. These include user profiles for personalized experiences, botanical garden structures with attractions and tours, detailed attraction profiles encompassing user-generated comments and reviews, and a versatile commenting and reviewing systems to enhance user interaction.
             </p>
             <p>
                 The integration of external data sources plays a pivotal role in enriching the application's content. Utilizing SPARQL endpoints such as DBpedia, Wikidata, and Bio2RDF ensures a vast repository of botanical information and taxonomy data. Additionally, the application taps into mapping services like Google Maps API for interactive garden maps, weather APIs for real-time weather updates, and social media APIs for seamless integration with platforms like Instagram and Twitter. Events Calendar API keeps users informed about upcoming activities, workshops, and exhibitions. The inclusion of botanical research databases further enhances the depth of available information.
@@ -81,7 +81,7 @@
         
             <h3>Attraction</h3>
             <p>
-                Attractions are the heart of botanical gardens, and the <em>Attraction</em> model encapsulates the details of each captivating element. Developing this model involves considerations for diverse attraction types, descriptive content, and engaging visual elements. The inclusion of a list of comments enhances user interaction and community engagement around each attraction.
+                Attractions are the heart of botanical gardens, and the <em>Attraction</em> model encapsulates the details of each captivating element. Developing this model involves considerations for diverse attraction types, descriptive content, and engaging visual elements. The inclusion of a list of comments and reviews enhances user interaction and community engagement around each attraction.
             </p>
             <ul>
                 <li>Attraction ID</li>
@@ -90,11 +90,12 @@
                 <li>Type (e.g., Flower, Tree)</li>
                 <li>Description</li>
                 <li>Comments (List of Comments)</li>
+                <li>Reviews (List of Reviews)</li>
             </ul>
         
             <h3>Tour</h3>
             <p>
-                The concept of curated tours adds an educational and immersive layer to the application. During development, the <em>Tour</em> model involves structuring tours with a unique identifier, a descriptive name, and a list of attractions that constitute the tour. Integration with comments allows users to share their experiences and insights about specific tours.
+                The concept of curated tours adds an educational and immersive layer to the application. During development, the <em>Tour</em> model involves structuring tours with a unique identifier, a descriptive name, and a list of attractions that constitute the tour. Integration with comments and reviews allows users to share their experiences and insights about specific tours.
             </p>
             <ul>
                 <li>Tour ID</li>
@@ -102,16 +103,18 @@
                 <li>Description</li>
                 <li>Attractions (List of Attractions)</li>
                 <li>Comments (List of Comments)</li>
+                <li>Reviews (List of Reviews)</li>
             </ul>
         
-            <h3>Comment</h3>
+            <h3>Comment/Review</h3>
             <p>
-                User-generated content plays a crucial role in enhancing the collaborative nature of the Botanical Gardens Application. The <em>Comment</em> model captures user insights, opinions, and interactions. During development, implementing a versatile system that accommodates various comment types (text, image) ensures a dynamic and engaging platform for users to share and learn.
+                User-generated content plays a crucial role in enhancing the collaborative nature of the Botanical Gardens Application. The <em>Comment/Review</em> models capture user insights, opinions, and interactions. During development, implementing a versatile system that accommodates various comment types (text, image) and review ratings (numbers ranging from 1 to 10) ensures a dynamic and engaging platform for users to share and learn.
             </p>
             <ul>
                 <li>User</li>
                 <li>Comment type (e.g., text, image)</li>
                 <li>Comment content</li>
+                <li>Review rating</li>
             </ul>
         
             <p>
@@ -230,7 +233,7 @@
         
             <h3>1. Use URIs as Names for Things:</h3>
             <p>
-                In the Botanical Gardens Application, every entity, whether it be a botanical garden, attraction, tour, or user-generated comment, is assigned a unique Uniform Resource Identifier (URI). These URIs act as digital identifiers, ensuring global recognition and persistence. By providing a standardized naming convention, the application establishes a foundation for precise identification and retrieval of botanical entities across the platform.
+                In the Botanical Gardens Application, every entity, whether it be a botanical garden, attraction, tour, or user-generated comment or review, is assigned a unique Uniform Resource Identifier (URI). These URIs act as digital identifiers, ensuring global recognition and persistence. By providing a standardized naming convention, the application establishes a foundation for precise identification and retrieval of botanical entities across the platform.
             </p>
         
             <h3>2. Use HTTP URIs:</h3>
@@ -271,7 +274,7 @@
                 The application's adherence to Linked Data principles plays a pivotal role in leveraging the web as a dynamic database. By using URIs, HTTP protocols, and standardized formats like RDF, the application ensures not only a structured and standardized representation of data but also the ability to seamlessly link and navigate between different entities. This interconnected web of botanical information enhances the discoverability of knowledge, allowing users to traverse from one piece of information to another, creating a richer and more engaging experience.
             </p>
             <p>
-                The decision to treat the web as a "big database" aligns with the vision of providing users with a holistic view of botanical gardens. Whether it's exploring attractions, participating in tours, or engaging in user-generated comments, the web's expansive nature allows the application to present a comprehensive and diverse range of botanical content. Moreover, by linking to real-time data sources such as weather APIs, social media platforms, and educational content APIs, the application remains dynamic and relevant, keeping users informed and connected to the broader botanical community.
+                The decision to treat the web as a "big database" aligns with the vision of providing users with a holistic view of botanical gardens. Whether it's exploring attractions, participating in tours, or engaging in user-generated comments or reviews, the web's expansive nature allows the application to present a comprehensive and diverse range of botanical content. Moreover, by linking to real-time data sources such as weather APIs, social media platforms, and educational content APIs, the application remains dynamic and relevant, keeping users informed and connected to the broader botanical community.
             </p>
             <p>
                 In conclusion, the Botanical Gardens Application not only encapsulates the beauty of botanical gardens but also embodies the spirit of an interconnected and ever-expanding web of knowledge. As technology continues to advance, leveraging the web as a "big database" opens new frontiers for applications like these, promising a future where information flows seamlessly, and users embark on immersive journeys of exploration and learning.

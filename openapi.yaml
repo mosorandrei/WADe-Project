@@ -99,6 +99,21 @@ paths:
                     name: Rose Garden
                   - id: 302
                     name: Oak Grove
+    post:
+      summary: Book a spot for tour / exhibition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              tour_id: 101
+      responses:
+        '201':
+          description: User booked successfully
+        '403':
+          description: The booking request cannot be fulfilled
+        '401':
+          description: You must log in before attempting this action
 
   /attractions/{attraction_id}:
     get:
@@ -156,3 +171,39 @@ paths:
           description: Comment added successfully
         '400':
           description: Comments can only be added to tours or attractions
+          
+  /reviews:
+    get:
+      summary: Get reviews for a specific item (tour, attraction)
+      parameters:
+        - name: item_id
+          in: query
+          description: The ID of the item (tour or attraction)
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Reviews for the item
+          content:
+            application/json:
+              example:
+                - user: User1
+                  rating: "10/10"
+                - user: User2
+                  rating: "8/10"
+
+    post:
+      summary: Add a new review to a tour or attraction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              item_id: 201
+              rating: 9
+      responses:
+        '201':
+          description: Review added successfully
+        '400':
+          description: Reviews can only be added to tours or attractions
