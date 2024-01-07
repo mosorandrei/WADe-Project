@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { BrowserRouter as Router} from 'react-router-dom';
+import Header from './components/Header';
+import Content from './components/Content';
+import Footer from './components/Footer';
+
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [selectedGarden, setSelectedGarden] = useState(null); 
   return (
-    <h1 className="text-3xl underline">
-      Hello world!
-    </h1>
-  )
+    <Router>
+      <div>
+        <Header isAuthenticated={isAuthenticated}/>
+        <Content isAuthenticated={isAuthenticated} selectedGarden={null}/>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
 export default App
