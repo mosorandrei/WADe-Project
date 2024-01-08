@@ -1,13 +1,18 @@
 import React from 'react';
 
-const Home = () => {
+const Home = ({isAuthenticated, setCurrentPage}) => {
+  function changePage() {
+    if(isAuthenticated) {
+      setCurrentPage("GardensDropdown");
+    } else setCurrentPage("Login");
+  }
   return (
     <div>
       <section className="bg-gray-100 p-8">
         <div className="max-w-screen-xl mx-auto flex justify-between">
           <div className="w-1/2 mr-4">
             <h2 className="text-4xl font-bold mb-8">Welcome to Botanical Garden Guide!</h2>
-            <button className="bg-green-500 text-white ml-4 py-2 px-4 rounded-full text-lg md:text-xl lg:text-2xl hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400">
+            <button className="bg-green-500 text-white ml-4 py-2 px-4 rounded-full text-lg md:text-xl lg:text-2xl hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400" onClick={() => changePage()}>
                 Dive in!
             </button>
           </div>
@@ -34,14 +39,14 @@ const Home = () => {
       <h2 className="text-3xl font-bold mb-16">Contact</h2>
         <div className="max-w-screen-xl mx-auto flex justify-around">
           <div className="w-1/4">
-            <img src="../public/poza_Smau.jpg" alt="Smau" className="rounded mb-4" />
+            <img src="" alt="Smau" className="rounded mb-4" />
             <p className="font-bold text-xl mb-2">Smau Adrian</p>
             <p>Email: adriansmau@yahoo.com</p>
             <p>GitHub: <a href="https://github.com/AdrianSmau">github.com/AdrianSmau</a></p>
             <p>Linkedin: <a href="https://www.linkedin.com/in/smauadrianconstantin/">Smau Adrian-Constantin</a></p>
           </div>
           <div className="w-1/4">
-            <img src='../public/poza_Mosor.jpg' alt="Mosor" className="rounded mb-4" />
+            <img src='' alt="Mosor" className="rounded mb-4" />
             <p className="font-bold text-xl mb-2">Mosor Andrei</p>
             <p>Email: mosorandrei49@gmail.com</p>
             <p>GitHub: <a href="https://github.com/mosorandrei">github.com/mosorandrei</a></p>
