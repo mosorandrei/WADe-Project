@@ -1,20 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Home = ({isAuthenticated, setCurrentPage}) => {
-  function changePage() {
-    if(isAuthenticated) {
-      setCurrentPage("GardensDropdown");
-    } else setCurrentPage("Login");
-  }
+const Home = (status) => {
+  var linkTo = status.isAuthenticated ? "/gardens" : "/login";
+  
   return (
     <div>
       <section className="bg-gray-100 p-8">
         <div className="max-w-screen-xl mx-auto flex justify-between">
           <div className="w-1/2 mr-4">
             <h2 className="text-4xl font-bold mb-8">Welcome to Botanical Garden Guide!</h2>
-            <button className="bg-green-500 text-white ml-4 py-2 px-4 rounded-full text-lg md:text-xl lg:text-2xl hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400" onClick={() => changePage()}>
-                Dive in!
-            </button>
+            <Link to={linkTo} className="bg-green-500 text-white ml-4 py-2 px-4 rounded-full text-lg md:text-xl lg:text-2xl hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400">
+              Dive in!
+            </Link>
           </div>
           <div className="w-1/2 ml-4">
             <h2 className="text-4xl font-bold">Join us in a marvelous adventure where you can explore and find out about 10,000+ species from the botanic field!</h2>

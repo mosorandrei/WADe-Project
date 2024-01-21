@@ -9,13 +9,12 @@ import './App.css';
 function App() {
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [selectedGarden, setSelectedGarden] = useState(null);
-  const [currentPage, setCurrentPage] = useState('Home');
 
   return (
     <Router>
       <div>
-        <Header isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} setCurrentPage={setCurrentPage} />
-        <Content isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Header isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} />
+        <Content isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden} />
         <Footer />
       </div>
     </Router>

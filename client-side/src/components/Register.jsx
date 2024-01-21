@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Register = ({isAuthenticated, setAuthenticated, setCurrentPage}) => {
+const Register = ({isAuthenticated, setAuthenticated}) => {
 
   const registerUser = () => {
     if(!isAuthenticated) {
       setAuthenticated(true);
-      setCurrentPage("GardensDropdown");
     }
   }
 
@@ -40,9 +40,13 @@ const Register = ({isAuthenticated, setAuthenticated, setCurrentPage}) => {
           </label>
         </div>
         <div className="flex justify-between items-center mb-4">
-          <button className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2" onClick={registerUser}>
+        <Link
+            to="/"
+            className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2"
+            onClick={registerUser}
+          >
             Register Now
-          </button>
+          </Link>
           <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-400 mb-2" onClick={registerUser}>
             Register with Google
           </button>

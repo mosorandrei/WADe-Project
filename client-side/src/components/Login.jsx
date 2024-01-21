@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Login = ({isAuthenticated, setAuthenticated, setCurrentPage}) => {
+const Login = ({isAuthenticated, setAuthenticated}) => {
   const loginUser = () => {
     if(!isAuthenticated) {
       setAuthenticated(true);
-      setCurrentPage("GardensDropdown");
     }
   }
   
@@ -20,9 +20,13 @@ const Login = ({isAuthenticated, setAuthenticated, setCurrentPage}) => {
           <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Password</label>
           <input type="password" id="password" className="w-full border-2 border-gray-300 p-2 rounded" />
         </div>
-        <button className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2" onClick={loginUser}>
+        <Link
+          to="/"
+          className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2"
+          onClick={loginUser}
+        >
           Sign In
-        </button>
+        </Link>
         <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-400 mb-2" onClick={loginUser}>
           Sign in using Google
         </button>
