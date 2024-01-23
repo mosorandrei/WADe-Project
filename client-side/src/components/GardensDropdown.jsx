@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const GardensDropdown = ({setSelectedGarden}) => {
+const GardensDropdown = ({isAuthenticated, setSelectedGarden}) => {
   const gardenNames = ["Garden 1", "Garden 2", "Garden 3"];
 
   const selectGarden = (event) => {
@@ -10,7 +10,7 @@ const GardensDropdown = ({setSelectedGarden}) => {
   }
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-4 md:p-8 rounded shadow-md">
+    isAuthenticated && <div className="max-w-xl mx-auto bg-white p-4 md:p-8 rounded shadow-md">
       <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Which marvelous botanical garden are you ready to explore?</h2>
       <div className="flex flex-col">
         <label htmlFor="gardenSelect" className="block text-gray-700 font-bold mb-2">Select a garden:</label>
