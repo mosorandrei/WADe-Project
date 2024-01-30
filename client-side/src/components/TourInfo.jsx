@@ -26,6 +26,8 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
       onRequestClose={onClose}
       contentLabel="Tour Individual Details"
       style={customStyles}
+      vocab="http://schema.org/"
+      typeof="TouristAttraction"
     >
       <div className="border-2 border-white h-full relative">
         <button
@@ -36,26 +38,26 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
         </button>
         <div className="flex justify-end p-5"></div>
         <div className="p-10 overflow-auto">
-          <div className="text-6xl mb-5">
+          <div property="name" className="text-6xl mb-5">
             Name: <span className="italic">{tour.name}</span>
           </div>
-          <div className="text-3xl mb-5">
+          <div property="description" className="text-3xl mb-5">
             Short description: <span className="italic">{tour.description}</span>
           </div>
-          <div className="text-3xl mb-5">
+          <div property="tourGuide" className="text-3xl mb-5">
             Tour Guide: <span className="italic">{tour.guide}</span>
           </div>
-          <div className="text-3xl mb-5 text-red-500">
+          <div property="remainingPlaces" className="text-3xl mb-5 text-red-500">
             Remaining places: <span className="italic">{tour.availablePlaces}</span>
           </div>
-          <div className="text-3xl mb-5">
+          <div property="duration" className="text-3xl mb-5">
             Duration: <span className="italic">{tour.startHour}-{tour.endHour}</span>
           </div>
           <div className="mb-5">
             <div className="text-2xl mb-2 underline">Comments:</div>
             {tour.comments.map((comment, index) => (
               <div key={`comment-${index}`} className="text-xl">
-                <span className="font-bold">{comment.user}</span> has commented: {comment.commentContent}
+                <span property={`author-${index}`} className="font-bold">{comment.user}</span> has commented: {comment.commentContent}
               </div>
             ))}
             <div className="flex items-center mt-2">
@@ -78,7 +80,7 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
             <div className="text-2xl mb-2 underline">Reviews:</div>
             {tour.reviews.map((review, index) => (
               <div key={`review-${index}`} className="text-xl">
-                <span className="font-bold">{review.user}</span> has rated: {review.rating}
+                <span property={`author-${index}`} className="font-bold">{review.user}</span> has rated: {review.rating}
               </div>
             ))}
             <div className="flex items-center mt-2">
@@ -99,7 +101,7 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
               </button>
             </div>
           </div>
-          <img src="" alt="Tour" className="rounded mb-4" />
+          <img src="" alt="Tour" className="rounded mb-4" property="image"/>
           <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >

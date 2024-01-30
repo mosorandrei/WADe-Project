@@ -23,9 +23,10 @@ const GardenMatrix = ({ gardenInfo, cellSize }) => {
         );
     };
 
-    const createTourLine = (coordinates1, coordinates2, tour) => {
+    const createTourLine = (id, coordinates1, coordinates2, tour) => {
         return (
             <TourLine
+            id={id}
             x1={coordinates1.cx}
             y1={coordinates1.cy}
             x2={coordinates2.cx}
@@ -70,7 +71,7 @@ const GardenMatrix = ({ gardenInfo, cellSize }) => {
                 if (attractionId1 !== attractionId2) {
                     const coordinates1 = coordinates.find(item => item.id == attractionId1);
                     const coordinates2 = coordinates.find(item => item.id == attractionId2);
-                    attractionsSVG.push(createTourLine(coordinates1, coordinates2, tour));
+                    attractionsSVG.push(createTourLine(attractionId1+attractionId2, coordinates1, coordinates2, tour));
                 }
             }
         }

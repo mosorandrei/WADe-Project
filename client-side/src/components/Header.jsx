@@ -7,10 +7,10 @@ const Header = ({ isAuthenticated, setAuthenticated }) => {
     setAuthenticated(false);
   }
   return (
-    <header className="bg-green-500 p-4 fixed left-0 top-0 w-full">
+    <header className="bg-green-500 p-4 fixed left-0 top-0 w-full" vocab="http://schema.org/" typeof="WebSite">
       <nav className="flex justify-between items-center">
         <div>
-          <h1 className="text-white text-xl md:text-2xl lg:text-3xl font-bold italic">Botanical Garden Guide</h1>
+          <h1 property="name" className="text-white text-xl md:text-2xl lg:text-3xl font-bold italic">Botanical Garden Guide</h1>
         </div>
         <ul className="flex flex-wrap md:space-x-24">
         <li><Link to="/" className="text-white text-lg md:text-xl lg:text-2xl hover:underline cursor-pointer">Home</Link></li>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+
 import Header from './components/Header';
 import Content from './components/Content';
 import Footer from './components/Footer';
@@ -11,11 +12,30 @@ function App() {
   const [selectedGarden, setSelectedGarden] = useState(null);
 
   return (
-    <Router>
-      <div>
-        <Header isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} />
-        <Content isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden} />
-        <Footer />
+    <Router
+      typeof="schema:WebSite"
+      vocab="http://schema.org/"
+    >
+      <div
+        typeof="schema:WebPage"
+        property="schema:name schema:description"
+        content="My Botanical Web Guide"
+      >
+        <Header
+          isAuthenticated={isAuthenticated}
+          setAuthenticated={setAuthenticated}
+          property="schema:header"
+        />
+        <Content
+          isAuthenticated={isAuthenticated}
+          setAuthenticated={setAuthenticated}
+          selectedGarden={selectedGarden}
+          setSelectedGarden={setSelectedGarden}
+          property="schema:mainContentOfPage"
+        />
+        <Footer
+          property="schema:footer"
+        />
       </div>
     </Router>
   );
