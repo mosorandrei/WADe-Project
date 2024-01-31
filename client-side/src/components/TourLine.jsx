@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import TourInfo from './TourInfo';
 
-const TourLine = ({ x1, y1, x2, y2, tour }) => {
+const TourLine = ({ id, x1, y1, x2, y2, tour }) => {
     const [shownTour, setShownTour] = useState(false);
-    return (<svg className="absolute inset-0">
+    return (<svg className="absolute inset-0" id={id}>
         <line
             x1={x1}
             y1={y1}

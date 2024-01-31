@@ -5,8 +5,13 @@ const Home = (status) => {
   var linkTo = status.isAuthenticated ? "/gardens" : "/login";
   
   return (
-    <div>
-      <section className="bg-gray-100 p-8">
+    <div 
+      vocab="http://schema.org/"
+      typeof="WebPage"
+      property="name"
+      content="Botanical Garden Guide - Your Digital Passport to the Captivating World of Plants"
+      >
+      <section className="bg-gray-100 p-8" property="description">
         <div className="max-w-screen-xl mx-auto flex justify-between">
           <div className="w-1/2 mr-4">
             <h2 className="text-4xl font-bold mb-8">Welcome to Botanical Garden Guide!</h2>
@@ -19,8 +24,8 @@ const Home = (status) => {
           </div>
         </div>
       </section>
-      <section className="bg-white p-8">
-        <div className="max-w-screen-xl mx-auto">
+      <section className="bg-white p-8" >
+        <div className="max-w-screen-xl mx-auto" property="about">
           <h2 className="text-3xl font-bold mb-8">About Us</h2>
           <p className='text-xl mb-8 text-justify'>
             Welcome to the Botanical Garden Guide, your digital passport to the captivating world of plants. Our mission is to inspire and educate, providing a platform where enthusiasts and curious minds alike can delve into the rich tapestry of botanical wonders.
@@ -34,21 +39,21 @@ const Home = (status) => {
         </div>
       </section>
       <section className="bg-gray-100 p-8">
-      <h2 className="text-3xl font-bold mb-16">Contact</h2>
+        <h2 className="text-3xl font-bold mb-16">Contact</h2>
         <div className="max-w-screen-xl mx-auto flex justify-around">
-          <div className="w-1/4">
+          <div className="w-1/4" typeof="Person">
             <img src="" alt="Smau" className="rounded mb-4" />
-            <p className="font-bold text-xl mb-2">Smau Adrian</p>
+            <p className="font-bold text-xl mb-2" property="name">Smau Adrian</p>
             <p>Email: adriansmau@yahoo.com</p>
-            <p>GitHub: <a href="https://github.com/AdrianSmau">github.com/AdrianSmau</a></p>
-            <p>Linkedin: <a href="https://www.linkedin.com/in/smauadrianconstantin/">Smau Adrian-Constantin</a></p>
+            <p>GitHub: <a href="https://github.com/AdrianSmau" property="url">github.com/AdrianSmau</a></p>
+            <p>Linkedin: <a href="https://www.linkedin.com/in/smauadrianconstantin/" property="url">Smau Adrian-Constantin</a></p>
           </div>
-          <div className="w-1/4">
+          <div className="w-1/4" typeof="Person">
             <img src='' alt="Mosor" className="rounded mb-4" />
-            <p className="font-bold text-xl mb-2">Mosor Andrei</p>
+            <p className="font-bold text-xl mb-2" property="name">Mosor Andrei</p>
             <p>Email: mosorandrei49@gmail.com</p>
-            <p>GitHub: <a href="https://github.com/mosorandrei">github.com/mosorandrei</a></p>
-            <p>Linkedin: <a href="https://www.linkedin.com/in/andrei-mosor-27961b202/">Andrei Mosor</a></p>
+            <p>GitHub: <a href="https://github.com/mosorandrei" property="url">github.com/mosorandrei</a></p>
+            <p>Linkedin: <a href="https://www.linkedin.com/in/andrei-mosor-27961b202/" property="url">Andrei Mosor</a></p>
           </div>
         </div>
       </section>
