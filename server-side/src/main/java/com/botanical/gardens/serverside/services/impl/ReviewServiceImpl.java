@@ -7,10 +7,12 @@ import com.botanical.gardens.serverside.repositories.*;
 import com.botanical.gardens.serverside.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ReviewServiceImpl implements ReviewService {
 
     private final AttractionRepository attractionRepository;
@@ -27,6 +29,11 @@ public class ReviewServiceImpl implements ReviewService {
         this.tourRepository = tourRepository;
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public Review saveReview(Review review) {
+        return reviewRepository.save(review);
     }
 
     @Override

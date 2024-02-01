@@ -5,10 +5,12 @@ import com.botanical.gardens.serverside.repositories.*;
 import com.botanical.gardens.serverside.services.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class TourServiceImpl implements TourService {
 
     private final TourRepository tourRepository;

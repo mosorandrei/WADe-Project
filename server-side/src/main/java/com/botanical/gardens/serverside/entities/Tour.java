@@ -3,6 +3,7 @@ package com.botanical.gardens.serverside.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -23,17 +24,22 @@ public class Tour {
     private String description;
     private String guideName;
     private int totalSeats;
-    private LocalTime startHour;
-    private LocalTime endHour;
-    @OneToMany(cascade = CascadeType.ALL)
+    private Date startHour;
+    private Date endHour;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @ToString.Exclude
+    private List<Attraction> attractions;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Review> reviews;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<User> participants;
 

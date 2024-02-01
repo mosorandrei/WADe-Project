@@ -26,13 +26,15 @@ public class Attraction {
     @Lob
     private byte[] photo;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Review> reviews;
+
+    private String url;
 
     @Override
     public boolean equals(Object o) {

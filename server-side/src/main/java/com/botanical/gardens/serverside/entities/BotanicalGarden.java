@@ -22,11 +22,11 @@ public class BotanicalGarden {
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Tour> tours;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Attraction> attractions;
 }
