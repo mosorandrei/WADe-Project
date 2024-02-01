@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,8 +22,20 @@ public class Tour {
     private String name;
     private String description;
     private String guideName;
-    private int availableSeats;
+    private int totalSeats;
     private LocalTime startHour;
     private LocalTime endHour;
+    @OneToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Review> reviews;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<User> participants;
+
 
 }

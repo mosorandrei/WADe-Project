@@ -24,7 +24,7 @@ public class Attraction {
     private String type;
     private String description;
     @Lob
-    private String photo;
+    private byte[] photo;
 
     @OneToMany(cascade = CascadeType.ALL)
     @ToString.Exclude

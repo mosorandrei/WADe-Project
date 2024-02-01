@@ -19,9 +19,14 @@ public class BotanicalGarden {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "name", unique = true)
+    private String name;
+
     @OneToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Tour> tours;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Attraction> attractions;
 }
