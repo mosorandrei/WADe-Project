@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId).orElseThrow(() -> new RuntimeException(String.format("Could not find user with the id: %s", userId)));
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException(String.format("Could not find user with the email: %s", email)));
+    }
+
     public UserRepository getUserRepository() {
         return userRepository;
     }
