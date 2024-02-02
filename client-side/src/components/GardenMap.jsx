@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GardenMatrix from './GardenMatrix';
+import ToursPopup from './ToursPopup';
 
 const GardenMap = ({isAuthenticated, selectedGarden}) => {
   const getSelectedGardenInformation = (selectedGardenName) => {
@@ -98,7 +99,7 @@ const GardenMap = ({isAuthenticated, selectedGarden}) => {
       tours: [
         {
           id: 1,
-          name: "famous tour",
+          name: "famous tour2",
           description: "descriptionTour",
           guide: "vasile",
           startHour: "10:00",
@@ -168,6 +169,7 @@ const GardenMap = ({isAuthenticated, selectedGarden}) => {
 
   const [gardenInfo, setGardenInfo] = useState(null);
   const [cellSize, setCellSize] = useState(180);
+  const [showTours, setShowTours] = useState(false);
 
   useEffect(() => {
     const fetchedGardenInfo = getSelectedGardenInformation(selectedGarden);
@@ -199,12 +201,17 @@ const GardenMap = ({isAuthenticated, selectedGarden}) => {
           </span>
         </button>
       </Link>
-        <button className="mt-10 mr-4">
+        <button className="mt-10 mr-4" onClick={()=>setShowTours(true)}>
           <span className="text-white text-lg md:text-xl lg:text-2xl hover:underline bg-red-800 rounded-full px-8 p-3 cursor-pointer">
-            Explore our tours by clicking the lines between the attractions
+            Check available tours!
           </span>
         </button>
         </div>
+        <ToursPopup 
+          gardenInfo={gardenInfo}
+          showTours={showTours}
+          onClose={() => setShowTours(false)}
+        />
       </h2>
       <GardenMatrix gardenInfo={gardenInfo} cellSize={cellSize} />
     </section>

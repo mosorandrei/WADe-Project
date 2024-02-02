@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const GardensDropdown = ({isAuthenticated, setSelectedGarden}) => {
@@ -8,6 +8,10 @@ const GardensDropdown = ({isAuthenticated, setSelectedGarden}) => {
     const selectedGarden = event.target.value;
     setSelectedGarden(selectedGarden);
   }
+
+  useEffect(() => {
+    setSelectedGarden(gardenNames[0]);
+  }, [setSelectedGarden]);
 
   return (
     isAuthenticated && <div className="max-w-xl mx-auto bg-white p-4 md:p-8 rounded shadow-md" vocab="http://schema.org/">
