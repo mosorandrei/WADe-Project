@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface BotanicalGardenRepository extends JpaRepository<BotanicalGarden, Long> {
-    Optional<BotanicalGarden> findByName(String name);
 }

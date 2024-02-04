@@ -1,5 +1,6 @@
 package com.botanical.gardens.serverside.utils;
 
+import org.apache.jena.ontology.Individual;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.FileDocumentSource;
 import org.semanticweb.owlapi.io.FileDocumentTarget;
@@ -10,6 +11,8 @@ import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.Set;
 
 public class OntologyManager {
     private final String ontologyName = "http://smaumosorteam.com/ontologies/2024/botanical_garden.owl";
@@ -407,6 +410,36 @@ public class OntologyManager {
 
     public OWLClass getClass(String className) {
         return df.getOWLClass(ontologyName + "#" + className);
+    }
+
+    public OWLObjectProperty getObjectProperty(String objectPropertyName) {
+        return df.getOWLObjectProperty(ontologyName + "#" + objectPropertyName);
+    }
+
+    public Optional<OWLIndividual> getIndividualByProperty(OWLOntology o, String propertyName, String desiredValue){
+        for (OWLIndividual individual : o.getIndividualsInSignature()) {
+            Set<OWLDataPropertyAssertionAxiom> dataPropertyAssertions  = o.getDataPropertyAssertionAxioms(individual);
+
+            for (OWLDataPropertyAssertionAxiom assertion : dataPropertyAssertions) {
+                if (assertion.getProperty().equals(df.getOWLDataProperty(ontologyName + "#" + propertyName)) && assertion.getObject().equals(df.getOWLLiteral(desiredValue))) {
+                    return Optional.of(individual);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<OWLIndividual> getIndividualByProperty(OWLOntology o, String propertyName, int desiredValue){
+        for (OWLIndividual individual : o.getIndividualsInSignature()) {
+            Set<OWLDataPropertyAssertionAxiom> dataPropertyAssertions  = o.getDataPropertyAssertionAxioms(individual);
+
+            for (OWLDataPropertyAssertionAxiom assertion : dataPropertyAssertions) {
+                if (assertion.getProperty().equals(df.getOWLDataProperty(ontologyName + "#" + propertyName)) && assertion.getObject().equals(df.getOWLLiteral(desiredValue))) {
+                    return Optional.of(individual);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     public OWLAxiomChange createSubclass(OWLOntology o, OWLClass subclass, OWLClass superclass) {

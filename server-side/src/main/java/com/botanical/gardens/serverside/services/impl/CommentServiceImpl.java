@@ -1,8 +1,10 @@
 package com.botanical.gardens.serverside.services.impl;
 
-import com.botanical.gardens.serverside.entities.Comment;
-import com.botanical.gardens.serverside.repositories.jpa.CommentRepository;
+import com.botanical.gardens.serverside.dto.CommentDTO;
+import com.botanical.gardens.serverside.repositories.owl.CommentOwlRepository;
 import com.botanical.gardens.serverside.services.CommentService;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,16 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class CommentServiceImpl implements CommentService {
-
-    private final CommentRepository commentRepository;
+    private final CommentOwlRepository commentOwlRepository;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository) {
-        this.commentRepository = commentRepository;
+    public CommentServiceImpl(CommentOwlRepository commentOwlRepository) {
+        this.commentOwlRepository = commentOwlRepository;
     }
 
     @Override
-    public Comment saveComment(Comment comment) {
-        return commentRepository.save(comment);
+    public void saveComment(CommentDTO comment) throws OWLOntologyCreationException, OWLOntologyStorageException {
+        commentOwlRepository.addCommentIndividual(comment.getContent(), comment.getTourName(), comment.getFirstName(), comment.getLastName());
     }
 }

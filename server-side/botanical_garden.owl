@@ -533,6 +533,18 @@
     
 
 
+    <!-- http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment-371fe837-7691-4b47-868b-d2933589b0e3 -->
+
+
+    <owl:NamedIndividual rdf:about="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment-371fe837-7691-4b47-868b-d2933589b0e3">
+        <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment"/>
+        <isCommentOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiTour2"/>
+        <isGivenBy rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Smau-Adrian-1"/>
+        <hasCommentContent>I like this!</hasCommentContent>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Cosmos -->
 
 
@@ -613,6 +625,8 @@
         <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Tour"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Daisy"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Orchid"/>
+        <hasComment rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment-371fe837-7691-4b47-868b-d2933589b0e3"/>
+        <hasReview rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review-5ac72f03-2571-469b-930e-4154280457b7"/>
         <isTourOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiGarden"/>
         <hasTourDescription>Free entry for all</hasTourDescription>
         <hasTourEndHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</hasTourEndHour>
@@ -725,6 +739,32 @@
         <hasAttractionDescription>Plantae kingdom</hasAttractionDescription>
         <hasAttractionName>Orchid</hasAttractionName>
         <hasAttractionType>Landscaping</hasAttractionType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review-5ac72f03-2571-469b-930e-4154280457b7 -->
+
+
+    <owl:NamedIndividual rdf:about="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review-5ac72f03-2571-469b-930e-4154280457b7">
+        <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review"/>
+        <isGivenBy rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Smau-Adrian-1"/>
+        <isReviewOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiTour2"/>
+        <hasReviewContent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</hasReviewContent>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Smau-Adrian-1 -->
+
+
+    <owl:NamedIndividual rdf:about="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Smau-Adrian-1">
+        <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#User"/>
+        <hasGiven rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment-371fe837-7691-4b47-868b-d2933589b0e3"/>
+        <hasGiven rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review-5ac72f03-2571-469b-930e-4154280457b7"/>
+        <hasFirstName>Smau</hasFirstName>
+        <hasLastName>Adrian</hasLastName>
+        <hasUserId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</hasUserId>
     </owl:NamedIndividual>
     
 
