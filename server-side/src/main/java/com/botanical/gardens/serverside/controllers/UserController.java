@@ -26,7 +26,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Getter
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "https://65bfad59f775d96f899d7dd1--lustrous-selkie-ce070a.netlify.app"})
 @RequestMapping("/user")
 @RestController
 public class UserController {
