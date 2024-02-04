@@ -14,7 +14,7 @@ import lombok.*;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "comment_id", nullable = false)
     private Long id;
     private String content;
     @ManyToOne

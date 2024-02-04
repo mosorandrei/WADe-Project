@@ -1,4 +1,4 @@
-package com.botanical.gardens.serverside.repositories;
+package com.botanical.gardens.serverside.repositories.jpa;
 
 import com.botanical.gardens.serverside.entities.Attraction;
 import org.springframework.data.jpa.repository.JpaRepository;

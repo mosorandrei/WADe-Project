@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "attraction_id", nullable = false)
     private Long id;
     private String name;
     private String type;

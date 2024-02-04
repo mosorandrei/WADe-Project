@@ -1,7 +1,7 @@
 package com.botanical.gardens.serverside.services.impl;
 
 import com.botanical.gardens.serverside.entities.BotanicalGarden;
-import com.botanical.gardens.serverside.repositories.BotanicalGardenRepository;
+import com.botanical.gardens.serverside.repositories.jpa.BotanicalGardenRepository;
 import com.botanical.gardens.serverside.services.BotanicalGardenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

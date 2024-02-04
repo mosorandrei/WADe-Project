@@ -16,17 +16,21 @@ import java.util.List;
 public class BotanicalGarden {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "garden_id", nullable = false)
     private Long id;
 
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.MERGE)
     @ToString.Exclude
     private List<Tour> tours;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(
+            name = "gardens_attractions",
+            joinColumns = @JoinColumn(name = "garden_id"),
+            inverseJoinColumns = @JoinColumn(name = "attraction_id")
+    )
     private List<Attraction> attractions;
 }

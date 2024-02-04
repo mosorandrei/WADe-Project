@@ -1,17 +1,15 @@
 package com.botanical.gardens.serverside.controllers;
 
-import com.botanical.gardens.serverside.entities.*;
-import com.botanical.gardens.serverside.rdf.OntologyGenerator;
-import com.botanical.gardens.serverside.services.*;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import com.botanical.gardens.serverside.entities.BotanicalGarden;
+import com.botanical.gardens.serverside.services.BotanicalGardenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @RequestMapping("/botanical-gardens")
@@ -19,27 +17,9 @@ import java.util.List;
 public class BotanicalGardenController {
     private final BotanicalGardenService botanicalGardenService;
 
-    private final OntologyGenerator generator;
-
-    private final AttractionService attractionService;
-
-    private final CommentService commentService;
-
-    private final ReviewService reviewService;
-
-    private final TourService tourService;
-
-    private final UserService userService;
-
     @Autowired
-    public BotanicalGardenController(BotanicalGardenService botanicalGardenService, OntologyGenerator generator, AttractionService attractionService, CommentService commentService, ReviewService reviewService, TourService tourService, UserService userService) {
+    public BotanicalGardenController(BotanicalGardenService botanicalGardenService) {
         this.botanicalGardenService = botanicalGardenService;
-        this.generator = generator;
-        this.attractionService = attractionService;
-        this.commentService = commentService;
-        this.reviewService = reviewService;
-        this.tourService = tourService;
-        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -72,128 +52,5 @@ public class BotanicalGardenController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e.getMessage());
         }
-    }
-
-    @PostMapping("/createForTesting")
-    public ResponseEntity<String> createGarden() {
-        User andrei = User.builder()
-                .firstName("Andrei")
-                .lastName("Mosor")
-                .email("mosorandrei49@gmail.com")
-                .password("salut")
-                .build();
-
-        User adi = User.builder()
-                .firstName("Adrian")
-                .lastName("Smau")
-                .email("adriansmau@gmail.com")
-                .password("salut")
-                .build();
-
-        userService.saveUser(andrei);
-        userService.saveUser(adi);
-        Comment comment1 = Comment.builder()
-                .content("comment1")
-                .user(andrei)
-                .build();
-
-        Comment comment2 = Comment.builder()
-                .content("comment2")
-                .user(adi)
-                .build();
-
-        Review review1 = Review.builder()
-                .rating(10)
-                .user(andrei)
-                .build();
-
-        Review review2 = Review.builder()
-                .rating(8)
-                .user(adi)
-                .build();
-
-        commentService.saveComment(comment1);
-        commentService.saveComment(comment2);
-        reviewService.saveReview(review1);
-        reviewService.saveReview(review2);
-
-        Attraction attraction1 = Attraction.builder()
-                .name("attraction1")
-                .type("flower")
-                .description("this is a flower")
-                .photo(null)
-                .comments(List.of(comment1))
-                .reviews(List.of(review1))
-                .build();
-
-        Attraction attraction2 = Attraction.builder()
-                .name("attraction2")
-                .type("tree")
-                .description("this is a tree")
-                .photo(null)
-                .comments(List.of(comment2))
-                .reviews(List.of(review2))
-                .build();
-
-        Attraction attraction3 = Attraction.builder()
-                .name("attraction3")
-                .type("arbust")
-                .description("this is an arbust")
-                .photo(null)
-                .build();
-
-        attractionService.saveAttraction(attraction1);
-        attractionService.saveAttraction(attraction2);
-        attractionService.saveAttraction(attraction3);
-
-        LocalDate date = LocalDate.of(2024, 2, 5);
-        Date sqlStartDate = Date.valueOf(date.atTime(10, 0).toLocalDate());
-        Date sqlEndDate = Date.valueOf(date.atTime(12, 0).toLocalDate());
-        Tour tour = Tour.builder()
-                .name("Magic Tour")
-                .description("this is magic tour")
-                .guideName("Vasile")
-                .attractions(List.of(attraction1, attraction2))
-                .startHour(sqlStartDate)
-                .endHour(sqlEndDate)
-                .totalSeats(7)
-                .participants(List.of(andrei, adi))
-                .build();
-
-        tourService.saveTour(tour);
-
-        BotanicalGarden garden = BotanicalGarden.builder()
-                .name("Best Garden")
-                .attractions(List.of(attraction1, attraction2, attraction3))
-                .tours(List.of(tour))
-                .build();
-
-        botanicalGardenService.saveBotanicalGarden(garden);
-        return ResponseEntity.ok("Initialize is done");
-    }
-
-
-    public BotanicalGardenService getBotanicalGardenService() {
-        return botanicalGardenService;
-    }
-
-    public AttractionService getAttractionService() {
-        return attractionService;
-    }
-
-    public CommentService getCommentService() {
-        return commentService;
-    }
-
-    public ReviewService getReviewService() {
-        return reviewService;
-    }
-
-    public TourService getTourService() {
-        return tourService;
-    }
-
-    public UserService getUserService() {
-        return userService;
     }
 }

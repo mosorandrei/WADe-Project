@@ -1,4 +1,4 @@
-package com.botanical.gardens.serverside.repositories;
+package com.botanical.gardens.serverside.repositories.jpa;
 
 import com.botanical.gardens.serverside.entities.Review;
 import com.botanical.gardens.serverside.entities.User;

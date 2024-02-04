@@ -68,11 +68,6 @@
             <version>5.5.0</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.1.0-alpha1</version>
-        </dependency>
-        <dependency>
             <groupId>net.sourceforge.owlapi</groupId>
             <artifactId>jfact</artifactId>
             <version>5.0.3</version>

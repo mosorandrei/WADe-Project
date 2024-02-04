@@ -1,6 +1,6 @@
 package com.botanical.gardens.serverside;
 
-import com.botanical.gardens.serverside.rdf.OntologyGenerator;
+import com.botanical.gardens.serverside.utils.OntologyManager;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 
 import static org.testng.Assert.*;
 
-public class OntologyGeneratorTest {
+public class OntologyManagerTest {
     private final String ontologyName = "http://smaumosorteam.com/ontologies/2024/test.owl";
 
     @Test
     public void createOntology() throws OWLException {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         IRI iri = oh.convertStringToIRI(ontologyName);
         OWLOntology ontology = oh.createOntology(iri);
 
@@ -41,7 +41,7 @@ public class OntologyGeneratorTest {
 
     @Test(dataProvider = "readDataProvider")
     public void readOntology(OWLOntologyDocumentSource source, String baseIRI) throws OWLException {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology ontology = oh.readOntology(source);
         assertNotNull(ontology);
         assertEquals(oh.convertStringToIRI(baseIRI),
@@ -50,7 +50,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void writeOntology() throws OWLException {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology ontology = oh.createOntology(ontologyName);
         StringDocumentTarget sdt = new StringDocumentTarget();
         oh.writeOntology(ontology, sdt);
@@ -63,7 +63,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void testAddClassesSimple() throws OWLOntologyCreationException {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
         OWLClass person = oh.createClass(ontologyName + "#Person");
         OWLClass fireman = oh.createClass(ontologyName + "#Fireman");
@@ -80,7 +80,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void testAddClassesMoreComplex() throws OWLOntologyCreationException {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
         OWLClass person = oh.createClass(ontologyName + "#Person");
         OWLClass robot = oh.createClass(ontologyName + "#Robot");
@@ -100,7 +100,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void addSimpleIndividual() throws Exception {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
         OWLClass person = oh.createClass(ontologyName + "#Person");
         OWLIndividual individual = oh.createIndividual(ontologyName + "#Individual");
@@ -124,7 +124,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void addTerminatorIndividuals() throws Exception {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
         OWLClass person = oh.createClass(ontologyName + "#Person");
         OWLClass robot = oh.createClass(ontologyName + "#Robot");
@@ -165,7 +165,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void simpleParentage() throws Exception {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
         OWLClass human = oh.createClass(ontologyName + "#Human");
         OWLClass male = oh.createClass(ontologyName + "#Male");
@@ -230,7 +230,7 @@ public class OntologyGeneratorTest {
 
     @Test
     public void addDataToIndividual() throws Exception {
-        OntologyGenerator oh = new OntologyGenerator();
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
         OWLClass cyborg = oh.createClass(ontologyName + "#Terminator");
         OWLDataProperty killsHumans =

@@ -1,23 +1,34 @@
-package com.botanical.gardens.serverside.rdf;
+package com.botanical.gardens.serverside.utils;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.FileDocumentSource;
+import org.semanticweb.owlapi.io.FileDocumentTarget;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentTarget;
-import org.semanticweb.owlapi.io.StringDocumentTarget;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
-import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.Arrays;
 
-@Service
-public class OntologyGenerator {
+public class OntologyManager {
     private final String ontologyName = "http://smaumosorteam.com/ontologies/2024/botanical_garden.owl";
+    private final String ontologyFileName = "botanical_garden.owl";
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
     OWLDataFactory df = OWLManager.getOWLDataFactory();
+    FileDocumentTarget sdt = new FileDocumentTarget(new File(ontologyFileName));
 
-    public String buildInitialRdf() throws OWLOntologyCreationException, OWLOntologyStorageException {
-        OntologyGenerator oh = new OntologyGenerator();
+    public OWLOntology getOntologyFromFile(OntologyManager oh) throws OWLOntologyCreationException {
+        return oh.readOntology(new FileDocumentSource(new File(ontologyFileName)));
+    }
+
+    public void saveOntologyToFile(OntologyManager oh, OWLOntology o) throws OWLOntologyStorageException {
+        FileDocumentTarget sdt = new FileDocumentTarget(new File(ontologyFileName));
+        oh.writeOntology(o, sdt);
+    }
+
+    public void buildInitialRdf() throws OWLOntologyCreationException, OWLOntologyStorageException {
+        OntologyManager oh = new OntologyManager();
         OWLOntology o = oh.createOntology(ontologyName);
 
         OWLClass user = oh.createClass(ontologyName + "#User");
@@ -35,30 +46,20 @@ public class OntologyGenerator {
                 oh.createDataProperty(ontologyName + "#hasAttractionType");
         OWLDataProperty hasAttractionDescription =
                 oh.createDataProperty(ontologyName + "#hasAttractionDescription");
-        OWLDataProperty hasAttractionId =
-                oh.createDataProperty(ontologyName + "#hasAttractionId");
 
         OWLClass garden = oh.createClass(ontologyName + "#Garden");
         OWLDataProperty hasGardenName =
                 oh.createDataProperty(ontologyName + "#hasGardenName");
-        OWLDataProperty hasGardenId =
-                oh.createDataProperty(ontologyName + "#hasGardenId");
 
         OWLClass comment = oh.createClass(ontologyName + "#Comment");
         OWLDataProperty hasCommentContent =
                 oh.createDataProperty(ontologyName + "#hasCommentContent");
-        OWLDataProperty hasCommentId =
-                oh.createDataProperty(ontologyName + "#hasCommentId");
 
         OWLClass review = oh.createClass(ontologyName + "#Review");
         OWLDataProperty hasReviewContent =
                 oh.createDataProperty(ontologyName + "#hasReviewContent");
-        OWLDataProperty hasReviewId =
-                oh.createDataProperty(ontologyName + "#hasReviewId");
 
         OWLClass tour = oh.createClass(ontologyName + "#Tour");
-        OWLDataProperty hasTourId =
-                oh.createDataProperty(ontologyName + "#hasTourId");
         OWLDataProperty hasTourName =
                 oh.createDataProperty(ontologyName + "#hasTourName");
         OWLDataProperty hasTourDescription =
@@ -103,23 +104,18 @@ public class OntologyGenerator {
                 oh.addDomainToDataProperty(o, user, hasUserId),
 
                 oh.addDomainToDataProperty(o, attraction, hasAttractionName),
-                oh.addDomainToDataProperty(o, attraction, hasAttractionId),
                 oh.addDomainToDataProperty(o, attraction, hasAttractionDescription),
                 oh.addDomainToDataProperty(o, attraction, hasAttractionType),
 
-                oh.addDomainToDataProperty(o, garden, hasGardenId),
                 oh.addDomainToDataProperty(o, garden, hasGardenName),
 
-                oh.addDomainToDataProperty(o, comment, hasCommentId),
                 oh.addDomainToDataProperty(o, comment, hasCommentContent),
 
-                oh.addDomainToDataProperty(o, review, hasReviewId),
                 oh.addDomainToDataProperty(o, review, hasReviewContent),
 
                 oh.addDomainToDataProperty(o, tour, hasTourEndHour),
                 oh.addDomainToDataProperty(o, tour, hasTourStartHour),
                 oh.addDomainToDataProperty(o, tour, hasTourDescription),
-                oh.addDomainToDataProperty(o, tour, hasTourId),
                 oh.addDomainToDataProperty(o, tour, hasTourName),
                 oh.addDomainToDataProperty(o, tour, hasTourGuideName),
                 oh.addDomainToDataProperty(o, tour, hasTourTotalSeats),
@@ -229,24 +225,151 @@ public class OntologyGenerator {
                 oh.addDomainToObjectProperty(o, user, isParticipantOf)
         );
 
-        StringDocumentTarget sdt = new StringDocumentTarget();
-        oh.writeOntology(o, sdt);
+        OWLIndividual orchid = oh.createIndividual(ontologyName + "#Orchid");
+        OWLIndividual sunflower = oh.createIndividual(ontologyName + "#Sunflower");
+        OWLIndividual tulip = oh.createIndividual(ontologyName + "#Tulip");
+        OWLIndividual azalea = oh.createIndividual(ontologyName + "#Azalea");
+        OWLIndividual chrysanthemum = oh.createIndividual(ontologyName + "#Chrysanthemum");
+        OWLIndividual lotus = oh.createIndividual(ontologyName + "#Lotus");
+        OWLIndividual iris = oh.createIndividual(ontologyName + "#Iris");
+        OWLIndividual daisy = oh.createIndividual(ontologyName + "#Daisy");
+        OWLIndividual hibiscus = oh.createIndividual(ontologyName + "#Hibiscus");
+        OWLIndividual lavender = oh.createIndividual(ontologyName + "#Lavender");
+        OWLIndividual cosmos = oh.createIndividual(ontologyName + "#Cosmos");
+        OWLIndividual lantana = oh.createIndividual(ontologyName + "#Lantana");
 
-        return sdt.toString();
-    }
+        OWLIndividual iasiGarden = oh.createIndividual(ontologyName + "#IasiGarden");
+        OWLIndividual newYorkGarden = oh.createIndividual(ontologyName + "#NewYorkGarden");
+
+        OWLIndividual iasiTour1 = oh.createIndividual(ontologyName + "#IasiTour1");
+        OWLIndividual iasiTour2 = oh.createIndividual(ontologyName + "#IasiTour2");
+        OWLIndividual newYorkTour = oh.createIndividual(ontologyName + "#NewYorkTour");
+
+        oh.applyChange(
+                oh.associateIndividualWithClass(o, attraction, orchid),
+                oh.addDataToIndividual(o, orchid, hasAttractionName, "Orchid"),
+                oh.addDataToIndividual(o, orchid, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, orchid, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, sunflower),
+                oh.addDataToIndividual(o, sunflower, hasAttractionName, "Sunflower"),
+                oh.addDataToIndividual(o, sunflower, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, sunflower, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, tulip),
+                oh.addDataToIndividual(o, tulip, hasAttractionName, "Tulip"),
+                oh.addDataToIndividual(o, tulip, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, tulip, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, azalea),
+                oh.addDataToIndividual(o, azalea, hasAttractionName, "Azalea"),
+                oh.addDataToIndividual(o, azalea, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, azalea, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, chrysanthemum),
+                oh.addDataToIndividual(o, chrysanthemum, hasAttractionName, "Chrysanthemum"),
+                oh.addDataToIndividual(o, chrysanthemum, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, chrysanthemum, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, lotus),
+                oh.addDataToIndividual(o, lotus, hasAttractionName, "Lotus"),
+                oh.addDataToIndividual(o, lotus, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, lotus, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, iris),
+                oh.addDataToIndividual(o, iris, hasAttractionName, "Iris"),
+                oh.addDataToIndividual(o, iris, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, iris, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, daisy),
+                oh.addDataToIndividual(o, daisy, hasAttractionName, "Daisy"),
+                oh.addDataToIndividual(o, daisy, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, daisy, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, hibiscus),
+                oh.addDataToIndividual(o, hibiscus, hasAttractionName, "Hibiscus"),
+                oh.addDataToIndividual(o, hibiscus, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, hibiscus, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, lavender),
+                oh.addDataToIndividual(o, lavender, hasAttractionName, "Lavander"),
+                oh.addDataToIndividual(o, lavender, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, lavender, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, cosmos),
+                oh.addDataToIndividual(o, cosmos, hasAttractionName, "Cosmos"),
+                oh.addDataToIndividual(o, cosmos, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, cosmos, hasAttractionType, "Landscaping"),
+                oh.associateIndividualWithClass(o, attraction, lantana),
+                oh.addDataToIndividual(o, lantana, hasAttractionName, "Lantana"),
+                oh.addDataToIndividual(o, lantana, hasAttractionDescription, "Plantae kingdom"),
+                oh.addDataToIndividual(o, lantana, hasAttractionType, "Landscaping"),
+
+                oh.associateIndividualWithClass(o, garden, iasiGarden),
+                oh.addDataToIndividual(o, iasiGarden, hasGardenName, "Iasi Garden"),
+                oh.associateIndividualWithClass(o, garden, newYorkGarden),
+                oh.addDataToIndividual(o, newYorkGarden, hasGardenName, "New York Garden"),
+
+                oh.associateIndividualWithClass(o, tour, iasiTour1),
+                oh.addDataToIndividual(o, iasiTour1, hasTourName, "Discover the beauty of Iasi"),
+                oh.addDataToIndividual(o, iasiTour1, hasTourDescription, "Enjoy a tour of our beautiful flowers"),
+                oh.addDataToIndividual(o, iasiTour1, hasTourStartHour, 11),
+                oh.addDataToIndividual(o, iasiTour1, hasTourEndHour, 13),
+                oh.addDataToIndividual(o, iasiTour1, hasTourGuideName, "Adrian Smau"),
+                oh.addDataToIndividual(o, iasiTour1, hasTourTotalSeats, 10),
+                oh.associateIndividualWithClass(o, tour, iasiTour2),
+                oh.addDataToIndividual(o, iasiTour2, hasTourName, "Open gates night"),
+                oh.addDataToIndividual(o, iasiTour2, hasTourDescription, "Free entry for all"),
+                oh.addDataToIndividual(o, iasiTour2, hasTourStartHour, 21),
+                oh.addDataToIndividual(o, iasiTour2, hasTourEndHour, 22),
+                oh.addDataToIndividual(o, iasiTour2, hasTourGuideName, "Andrei Mosor"),
+                oh.addDataToIndividual(o, iasiTour2, hasTourTotalSeats, 25),
+                oh.associateIndividualWithClass(o, tour, newYorkTour),
+                oh.addDataToIndividual(o, newYorkTour, hasTourName, "Grandest tour of 2024"),
+                oh.addDataToIndividual(o, newYorkTour, hasTourDescription, "Jewel of New York"),
+                oh.addDataToIndividual(o, newYorkTour, hasTourStartHour, 15),
+                oh.addDataToIndividual(o, newYorkTour, hasTourEndHour, 16),
+                oh.addDataToIndividual(o, newYorkTour, hasTourGuideName, "Ion Popa"),
+                oh.addDataToIndividual(o, newYorkTour, hasTourTotalSeats, 110),
+
+                oh.addObjectProperty(o, orchid, isAttractionOf, iasiGarden),
+                oh.addObjectProperty(o, sunflower, isAttractionOf, iasiGarden),
+                oh.addObjectProperty(o, chrysanthemum, isAttractionOf, iasiGarden),
+                oh.addObjectProperty(o, daisy, isAttractionOf, iasiGarden),
+                oh.addObjectProperty(o, iasiGarden, hasAttraction, orchid),
+                oh.addObjectProperty(o, iasiGarden, hasAttraction, sunflower),
+                oh.addObjectProperty(o, iasiGarden, hasAttraction, chrysanthemum),
+                oh.addObjectProperty(o, iasiGarden, hasAttraction, daisy),
+
+                oh.addObjectProperty(o, iasiTour1, hasAttraction, orchid),
+                oh.addObjectProperty(o, iasiTour1, hasAttraction, sunflower),
+                oh.addObjectProperty(o, iasiTour1, hasAttraction, chrysanthemum),
+                oh.addObjectProperty(o, orchid, isAttractionOf, iasiTour1),
+                oh.addObjectProperty(o, sunflower, isAttractionOf, iasiTour1),
+                oh.addObjectProperty(o, chrysanthemum, isAttractionOf, iasiTour1),
+
+                oh.addObjectProperty(o, iasiTour2, hasAttraction, orchid),
+                oh.addObjectProperty(o, iasiTour2, hasAttraction, daisy),
+                oh.addObjectProperty(o, orchid, isAttractionOf, iasiTour2),
+                oh.addObjectProperty(o, daisy, isAttractionOf, iasiTour2),
+
+                oh.addObjectProperty(o, tulip, isAttractionOf, newYorkGarden),
+                oh.addObjectProperty(o, azalea, isAttractionOf, newYorkGarden),
+                oh.addObjectProperty(o, lotus, isAttractionOf, newYorkGarden),
+                oh.addObjectProperty(o, chrysanthemum, isAttractionOf, newYorkGarden),
+                oh.addObjectProperty(o, orchid, isAttractionOf, newYorkGarden),
+                oh.addObjectProperty(o, lantana, isAttractionOf, newYorkGarden),
+                oh.addObjectProperty(o, newYorkGarden, hasAttraction, tulip),
+                oh.addObjectProperty(o, newYorkGarden, hasAttraction, azalea),
+                oh.addObjectProperty(o, newYorkGarden, hasAttraction, lotus),
+                oh.addObjectProperty(o, newYorkGarden, hasAttraction, chrysanthemum),
+                oh.addObjectProperty(o, newYorkGarden, hasAttraction, lantana),
+                oh.addObjectProperty(o, newYorkGarden, hasAttraction, orchid),
+
+                oh.addObjectProperty(o, newYorkTour, hasAttraction, tulip),
+                oh.addObjectProperty(o, newYorkTour, hasAttraction, lantana),
+                oh.addObjectProperty(o, newYorkTour, hasAttraction, chrysanthemum),
+                oh.addObjectProperty(o, newYorkTour, hasAttraction, lotus),
+                oh.addObjectProperty(o, tulip, isAttractionOf, newYorkTour),
+                oh.addObjectProperty(o, lantana, isAttractionOf, newYorkTour),
+                oh.addObjectProperty(o, chrysanthemum, isAttractionOf, newYorkTour),
+                oh.addObjectProperty(o, lotus, isAttractionOf, newYorkTour)
+        );
+        oh.writeOntology(o,sdt);
+}
 
     public IRI convertStringToIRI(String ns) {
         return IRI.create(ns);
-    }
-
-    public void dumpOWL(OWLOntology ontology) {
-        try {
-            StringDocumentTarget sdt = new StringDocumentTarget();
-            writeOntology(ontology, sdt);
-            System.out.println(sdt);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public OWLOntology createOntology(String iri) throws OWLOntologyCreationException {
@@ -275,8 +398,8 @@ public class OntologyGenerator {
         return df.getOWLClass(iri);
     }
 
-    public OWLAxiomChange addExactCardinality(OWLOntology o, OWLClass myClass, OWLObjectProperty property, int cardinality) {
-        return new AddAxiom(o, df.getOWLSubClassOfAxiom(myClass, df.getOWLObjectExactCardinality(cardinality, property, myClass)));
+    public OWLClass getClass(String className) {
+        return df.getOWLClass(ontologyName + "#" + className);
     }
 
     public OWLAxiomChange createSubclass(OWLOntology o, OWLClass subclass, OWLClass superclass) {
@@ -371,6 +494,10 @@ public class OntologyGenerator {
 
     public OWLDataProperty createDataProperty(IRI iri) {
         return df.getOWLDataProperty(iri);
+    }
+
+    public OWLDataProperty getDataProperty(String dataPropertyName) {
+        return df.getOWLDataProperty(ontologyName + "#" + dataPropertyName);
     }
 
     public OWLAxiomChange addDataToIndividual(OWLOntology o, OWLIndividual individual, OWLDataProperty property, String value) {

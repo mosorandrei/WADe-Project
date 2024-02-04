@@ -3,8 +3,8 @@ package com.botanical.gardens.serverside.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
-import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,16 +18,21 @@ import java.util.List;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "tour_id", nullable = false)
     private Long id;
     private String name;
     private String description;
     private String guideName;
     private int totalSeats;
-    private Date startHour;
-    private Date endHour;
+    private LocalDateTime startHour;
+    private LocalDateTime endHour;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
+    @JoinTable(
+            name = "tours_attractions",
+            joinColumns = @JoinColumn(name = "tour_id"),
+            inverseJoinColumns = @JoinColumn(name = "attraction_id")
+    )
     @ToString.Exclude
     private List<Attraction> attractions;
 

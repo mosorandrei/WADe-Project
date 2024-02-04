@@ -14,7 +14,7 @@ import lombok.*;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "review_id", nullable = false)
     private Long id;
     private int rating;
     @ManyToOne
