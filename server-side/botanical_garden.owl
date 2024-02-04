@@ -504,18 +504,6 @@
     
 
 
-    <!-- http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Adrian-Smau-1 -->
-
-
-    <owl:NamedIndividual rdf:about="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Adrian-Smau-1">
-        <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#User"/>
-        <hasFirstName>Adrian</hasFirstName>
-        <hasLastName>Smau</hasLastName>
-        <hasUserId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</hasUserId>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Azalea -->
 
 
@@ -592,6 +580,8 @@
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Daisy"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Orchid"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Sunflower"/>
+        <hasTour rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiTour1"/>
+        <hasTour rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiTour2"/>
         <hasGardenName>Iasi Garden</hasGardenName>
     </owl:NamedIndividual>
     
@@ -605,6 +595,7 @@
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Chrysanthemum"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Orchid"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Sunflower"/>
+        <isTourOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiGarden"/>
         <hasTourDescription>Enjoy a tour of our beautiful flowers</hasTourDescription>
         <hasTourEndHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</hasTourEndHour>
         <hasTourGuideName>Adrian Smau</hasTourGuideName>
@@ -622,6 +613,7 @@
         <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Tour"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Daisy"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Orchid"/>
+        <isTourOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiGarden"/>
         <hasTourDescription>Free entry for all</hasTourDescription>
         <hasTourEndHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</hasTourEndHour>
         <hasTourGuideName>Andrei Mosor</hasTourGuideName>
@@ -695,6 +687,7 @@
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Lotus"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Orchid"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Tulip"/>
+        <hasTour rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#NewYorkTour"/>
         <hasGardenName>New York Garden</hasGardenName>
     </owl:NamedIndividual>
     
@@ -709,6 +702,7 @@
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Lantana"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Lotus"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Tulip"/>
+        <isTourOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#NewYorkGarden"/>
         <hasTourDescription>Jewel of New York</hasTourDescription>
         <hasTourEndHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</hasTourEndHour>
         <hasTourGuideName>Ion Popa</hasTourGuideName>

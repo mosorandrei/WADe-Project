@@ -2,7 +2,10 @@ package com.botanical.gardens.serverside.services.impl;
 
 import com.botanical.gardens.serverside.entities.BotanicalGarden;
 import com.botanical.gardens.serverside.repositories.jpa.BotanicalGardenRepository;
+import com.botanical.gardens.serverside.repositories.owl.BotanicalGardenOwlRepository;
 import com.botanical.gardens.serverside.services.BotanicalGardenService;
+import lombok.Getter;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,35 +15,23 @@ import java.util.List;
 @Service
 @Transactional
 public class BotanicalGardenServiceImpl implements BotanicalGardenService {
-
+    @Getter
     private final BotanicalGardenRepository botanicalGardenRepository;
+    private final BotanicalGardenOwlRepository botanicalGardenOwlRepository;
 
     @Autowired
-    public BotanicalGardenServiceImpl(BotanicalGardenRepository botanicalGardenRepository) {
+    public BotanicalGardenServiceImpl(BotanicalGardenRepository botanicalGardenRepository, BotanicalGardenOwlRepository botanicalGardenOwlRepository) {
         this.botanicalGardenRepository = botanicalGardenRepository;
+        this.botanicalGardenOwlRepository = botanicalGardenOwlRepository;
     }
 
     @Override
-    public BotanicalGarden saveBotanicalGarden(BotanicalGarden botanicalGarden) {
-        return botanicalGardenRepository.save(botanicalGarden);
+    public void saveBotanicalGarden(BotanicalGarden botanicalGarden) {
+        botanicalGardenRepository.save(botanicalGarden);
     }
 
     @Override
-    public BotanicalGarden findBotanicalGardenById(Long botanicalGardenId) {
-        return botanicalGardenRepository.findById(botanicalGardenId).orElseThrow(() -> new RuntimeException(String.format("Could not find Botanical Garden with the id: %s", botanicalGardenId)));
-    }
-
-    @Override
-    public BotanicalGarden findBotanicalGardenByName(String name) {
-        return  botanicalGardenRepository.findByName(name).orElseThrow(() -> new RuntimeException(String.format("Could not find Botanical Garden with the name: %s", name)));
-    }
-
-    @Override
-    public List<BotanicalGarden> fetchBotanicalGardens() {
-        return botanicalGardenRepository.findAll();
-    }
-
-    public BotanicalGardenRepository getBotanicalGardenRepository() {
-        return botanicalGardenRepository;
+    public List<JSONObject> fetchBotanicalGardens() {
+        return botanicalGardenOwlRepository.getAllGardens();
     }
 }

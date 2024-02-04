@@ -363,7 +363,14 @@ public class OntologyManager {
                 oh.addObjectProperty(o, tulip, isAttractionOf, newYorkTour),
                 oh.addObjectProperty(o, lantana, isAttractionOf, newYorkTour),
                 oh.addObjectProperty(o, chrysanthemum, isAttractionOf, newYorkTour),
-                oh.addObjectProperty(o, lotus, isAttractionOf, newYorkTour)
+                oh.addObjectProperty(o, lotus, isAttractionOf, newYorkTour),
+
+                oh.addObjectProperty(o, newYorkGarden, hasTour, newYorkTour),
+                oh.addObjectProperty(o, newYorkTour, isTourOf, newYorkGarden),
+                oh.addObjectProperty(o, iasiGarden, hasTour, iasiTour1),
+                oh.addObjectProperty(o, iasiTour1, isTourOf, iasiGarden),
+                oh.addObjectProperty(o, iasiGarden, hasTour, iasiTour2),
+                oh.addObjectProperty(o, iasiTour2, isTourOf, iasiGarden)
         );
         oh.writeOntology(o,sdt);
 }
