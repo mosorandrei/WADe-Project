@@ -9,8 +9,8 @@ const customStyles = {
   },
 };
 
-const ToursPopup = ({ gardenInfo, showTours, onClose }) => {
-  const [tourStates, setTourStates] = useState(gardenInfo.tours.map(() => false));
+const ToursPopup = ({ tours, showTours, onClose }) => {
+  const [tourStates, setTourStates] = useState(tours.map(() => false));
 
   const handleTourClick = (index) => {
     const updatedTourStates = [...tourStates];
@@ -31,7 +31,7 @@ const ToursPopup = ({ gardenInfo, showTours, onClose }) => {
       contentLabel="Tours"
       style={customStyles}
     >
-      {gardenInfo.tours.map((tour, index) => (
+      {tours.map((tour, index) => (
         <div key={index} className="bg-white p-4 mb-4 rounded-md border border-blue-300">
           <div className="flex items-center">
             <div className="w-1/4">

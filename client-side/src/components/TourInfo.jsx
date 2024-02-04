@@ -26,8 +26,7 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
       onRequestClose={onClose}
       contentLabel="Tour Individual Details"
       style={customStyles}
-      vocab="http://schema.org/"
-      typeof="TouristAttraction"
+      typeof="bot:Tour"
     >
       <div className="border-2 border-white h-full relative">
         <button
@@ -38,26 +37,31 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
         </button>
         <div className="flex justify-end p-5"></div>
         <div className="p-10 overflow-auto">
-          <div property="name" className="text-6xl mb-5">
-            Name: <span className="italic">{tour.name}</span>
+          <div className="text-6xl mb-5">
+            Name: <span className="italic" property='bot:hasTourName'>{tour.name}</span>
           </div>
-          <div property="description" className="text-3xl mb-5">
-            Short description: <span className="italic">{tour.description}</span>
+          <div className="text-3xl mb-5">
+            Short description: <span className="italic" property='bot:hasTourDescription'>{tour.description}</span>
           </div>
-          <div property="tourGuide" className="text-3xl mb-5">
-            Tour Guide: <span className="italic">{tour.guide}</span>
+          <div className="text-3xl mb-5">
+            Tour Guide: <span className="italic" property='bot:hasTourGuideName'>{tour.guide}</span>
           </div>
-          <div property="remainingPlaces" className="text-3xl mb-5 text-red-500">
-            Remaining places: <span className="italic">{tour.availablePlaces}</span>
+          <div className="text-3xl mb-5 text-red-500">
+            Remaining places: <span className="italic" property='bot:hasTourTotalSeats'>{tour.availablePlaces}</span>
           </div>
-          <div property="duration" className="text-3xl mb-5">
-            Duration: <span className="italic">{tour.startHour}-{tour.endHour}</span>
+          <div className="text-3xl mb-5">
+            Duration: <span className="italic"><span property='bot:hasTourStartHour'>{tour.startHour}</span>-<span property='bot:hasTourEndHour'>{tour.endHour}</span></span>
           </div>
           <div className="mb-5">
             <div className="text-2xl mb-2 underline">Comments:</div>
             {tour.comments.map((comment, index) => (
-              <div key={`comment-${index}`} className="text-xl">
-                <span property={`author-${index}`} className="font-bold">{comment.user}</span> has commented: {comment.commentContent}
+              <div key={`comment-${index}`} className="text-xl" typeof='bot:hasComment'>
+                <div property='bot:User'>
+                <span property='bot:hasFirstName'className="font-bold">{comment.user}</span>
+
+                <span property='bot:hasLastName'className="font-bold">{comment.user}</span>   
+                has commented: <span typeof='bot:Comment' property='bot:hasCommentContent'>{comment.commentContent}</span>
+                </div>
               </div>
             ))}
             <div className="flex items-center mt-2">
@@ -79,8 +83,13 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
           <div className="mb-5">
             <div className="text-2xl mb-2 underline">Reviews:</div>
             {tour.reviews.map((review, index) => (
-              <div key={`review-${index}`} className="text-xl">
-                <span property={`author-${index}`} className="font-bold">{review.user}</span> has rated: {review.rating}
+              <div key={`review-${index}`} className="text-xl" typeof='bot:hasReview'>
+                <div property='bot:User'>
+                <span property='bot:hasFirstName'className="font-bold">{review.user}</span>
+
+                <span property='bot:hasLastName'className="font-bold">{review.user}</span>   
+                has commented: <span typeof='bot:Review' property='bot:hasReviewContent'>{review.rating}</span>
+                </div>
               </div>
             ))}
             <div className="flex items-center mt-2">
@@ -101,7 +110,6 @@ const TourInfo = ({ shownTour, onClose, tour }) => {
               </button>
             </div>
           </div>
-          <img src="" alt="Tour" className="rounded mb-4" property="image"/>
           <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >

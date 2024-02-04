@@ -3,7 +3,7 @@ import TourInfo from './TourInfo';
 
 const TourLine = ({ id, x1, y1, x2, y2, tour }) => {
     const [shownTour, setShownTour] = useState(false);
-    return (<svg className="absolute inset-0" id={id}>
+    return (<svg className="absolute inset-0" id={id} property="bot:hasTour">
         <line
             x1={x1}
             y1={y1}

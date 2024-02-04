@@ -9,13 +9,12 @@ const AttractionCircle = ({ attraction, cx, cy, outerRadius, innerRadius, isTopM
     return (
       <g
         key={`attraction-${attraction.id}`}
-        vocab="http://schema.org/"
+        property="bot:hasAttraction"
       >
-        <circle cx={cx} cy={cy} r={outerRadius} fill="red" className="attraction-outer"  property="Place"/>
+        <circle cx={cx} cy={cy} r={outerRadius} fill="red" className="attraction-outer"/>
         <circle cx={cx} cy={cy} r={innerRadius} fill="#8B0000" className="attraction-inner" onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={()=> setDetailsShown(true)} 
-        property="hasAttraction"/>
+        onClick={()=> setDetailsShown(true)} />
 
         {isHovered && (
           <text x={cx} y={cy - multiplier * 2 * innerRadius + 10} textAnchor="middle" fill="white" fontSize="17">
