@@ -38,7 +38,7 @@ public class UserOwlRepository {
                         PREFIX owl: <http://www.w3.org/2002/07/owl#>
                         PREFIX bot: <http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#>
 
-                        SELECT ?content ?fullName
+                        SELECT ?fn ?ln
                         WHERE {
                             ?garden rdf:type bot:Garden .
                             ?garden bot:hasGardenName "%s" .
@@ -48,7 +48,7 @@ public class UserOwlRepository {
                             OPTIONAL {
                              ?tour bot:hasParticipant ?participant .
                              ?participant bot:hasFirstName ?fn .
-                             ?participant bot:hasLastLane ?ln .
+                             ?participant bot:hasLastName ?ln .
                             }
                         }
                         """, gardenName, tourName);
@@ -58,7 +58,7 @@ public class UserOwlRepository {
         while (resultSet.hasNext()) {
             JSONObject participant = new JSONObject();
             QuerySolution solution = resultSet.nextSolution();
-            if (solution.get("firstName") != null) {
+            if (solution.get("fn") != null) {
                 participant.put("firstName", solution.get("fn").toString());
                 participant.put("lastName", solution.get("ln").toString());
                 result.add(participant);

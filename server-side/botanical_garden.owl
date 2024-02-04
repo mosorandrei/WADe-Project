@@ -626,6 +626,7 @@
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Daisy"/>
         <hasAttraction rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Orchid"/>
         <hasComment rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment-371fe837-7691-4b47-868b-d2933589b0e3"/>
+        <hasParticipant rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Smau-Adrian-1"/>
         <hasReview rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review-5ac72f03-2571-469b-930e-4154280457b7"/>
         <isTourOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiGarden"/>
         <hasTourDescription>Free entry for all</hasTourDescription>
@@ -633,7 +634,7 @@
         <hasTourGuideName>Andrei Mosor</hasTourGuideName>
         <hasTourName>Open gates night</hasTourName>
         <hasTourStartHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">21</hasTourStartHour>
-        <hasTourTotalSeats rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25</hasTourTotalSeats>
+        <hasTourTotalSeats rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</hasTourTotalSeats>
     </owl:NamedIndividual>
     
 
@@ -762,6 +763,7 @@
         <rdf:type rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#User"/>
         <hasGiven rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Comment-371fe837-7691-4b47-868b-d2933589b0e3"/>
         <hasGiven rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#Review-5ac72f03-2571-469b-930e-4154280457b7"/>
+        <isParticipantOf rdf:resource="http://smaumosorteam.com/ontologies/2024/botanical_garden.owl#IasiTour2"/>
         <hasFirstName>Smau</hasFirstName>
         <hasLastName>Adrian</hasLastName>
         <hasUserId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</hasUserId>
