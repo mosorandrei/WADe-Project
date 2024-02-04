@@ -191,8 +191,8 @@ const GardenMap = ({isAuthenticated, selectedGarden}) => {
   }, []);
 
   return isAuthenticated && gardenInfo && (
-    <section>
-      <h2 className="mb-10 text-4xl">Map of <p className='italic mt-2 font-bold text-6xl'>{selectedGarden}</p>
+    <section typeof="bot:Garden">
+      <h2 className="mb-10 text-4xl">Map of <p className='italic mt-2 font-bold text-6xl' property='bot:hasGardenName'>{selectedGarden}</p>
         <div>
         <Link to="/gardens">
         <button className="mt-10 mr-4">
