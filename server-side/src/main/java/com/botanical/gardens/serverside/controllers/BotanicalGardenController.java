@@ -1,7 +1,10 @@
 package com.botanical.gardens.serverside.controllers;
 
 import com.botanical.gardens.serverside.entities.*;
+import com.botanical.gardens.serverside.rdf.OntologyGenerator;
 import com.botanical.gardens.serverside.services.*;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @RequestMapping("/botanical-gardens")
 @RestController
 public class BotanicalGardenController {
     private final BotanicalGardenService botanicalGardenService;
+
+    private final OntologyGenerator generator;
 
     private final AttractionService attractionService;
 
@@ -28,8 +32,9 @@ public class BotanicalGardenController {
     private final UserService userService;
 
     @Autowired
-    public BotanicalGardenController(BotanicalGardenService botanicalGardenService, AttractionService attractionService, CommentService commentService, ReviewService reviewService, TourService tourService, UserService userService) {
+    public BotanicalGardenController(BotanicalGardenService botanicalGardenService, OntologyGenerator generator, AttractionService attractionService, CommentService commentService, ReviewService reviewService, TourService tourService, UserService userService) {
         this.botanicalGardenService = botanicalGardenService;
+        this.generator = generator;
         this.attractionService = attractionService;
         this.commentService = commentService;
         this.reviewService = reviewService;
