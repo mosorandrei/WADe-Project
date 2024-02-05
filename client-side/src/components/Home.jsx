@@ -42,7 +42,7 @@ const Home = (status) => {
         <h2 className="text-3xl font-bold mb-16">Contact</h2>
         <div className="max-w-screen-xl mx-auto flex justify-around">
           <div className="w-1/4" typeof="Person">
-            <img src="public\poza-mosor.jpg" alt="Smau" className="rounded mb-4" />
+            <img src="src\assets\contactPhotos\poza-smau.jpg" alt="Smau" className="rounded mb-4" />
             <p className="font-bold text-xl mb-2" property="name">Smau Adrian</p>
             <p>Email: adriansmau@yahoo.com</p>
             <p>GitHub: <a href="https://github.com/AdrianSmau" property="url">github.com/AdrianSmau</a></p>
