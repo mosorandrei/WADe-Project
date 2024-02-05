@@ -10,18 +10,6 @@ const customStyles = {
 };
 
 const AttractionPopup = ({ attraction, detailsShown, onClose }) => {
-  const [commentInput, setCommentInput] = useState('');
-  const [reviewInput, setReviewInput] = useState(5);
-
-  const handleAddComment = () => {
-    console.log('Adding comment:', commentInput);
-    setCommentInput('');
-  };
-
-  const handleAddReview = () => {
-    console.log('Adding review:', reviewInput);
-  };
-
   return (
     <ReactModal
       isOpen={detailsShown}
@@ -40,15 +28,14 @@ const AttractionPopup = ({ attraction, detailsShown, onClose }) => {
         <div className="flex justify-end p-5"></div>
         <div className="p-10 overflow-auto">
           <div className="text-6xl mb-5">
-            Name: <span className="italic" property='bot:hasAttractionName'>{attraction.name}</span>
+            Name: <span className="italic" property='bot:hasAttractionName'>{attraction.attractionName}</span>
           </div>
           <div className="text-3xl mb-5">
-            Short description: <span className="italic" property='bot:hasAttractionDescription'>{attraction.description}</span>
+            Short description: <span className="italic" property='bot:hasAttractionDescription'>{attraction.attractionDescription}</span>
           </div>
           <div className="text-3xl mb-5">
-            Attraction type: <span className="italic" property='bot:hasAttractionType'>{attraction.description}</span>
+            Attraction type: <span className="italic" property='bot:hasAttractionType'>{attraction.attractionType}</span>
           </div>
-          <div className="text-2xl mt-5" >Find out more at: <span property="bot:hasAttractionUrl" href="URL">URL</span></div>
         </div>
       </div>
     </ReactModal>

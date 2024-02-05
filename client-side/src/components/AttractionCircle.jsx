@@ -8,7 +8,7 @@ const AttractionCircle = ({ attraction, cx, cy, outerRadius, innerRadius, isTopM
     const multiplier = isTopMargin ? -1 : 1;
     return (
       <g
-        key={`attraction-${attraction.id}`}
+        key={`attraction-${attraction.attractionName}`}
         property="bot:hasAttraction"
       >
         <circle cx={cx} cy={cy} r={outerRadius} fill="red" className="attraction-outer"/>

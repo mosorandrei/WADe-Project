@@ -10,7 +10,7 @@ const Routes = ({ isAuthenticated, setAuthenticated, selectedGarden, setSelected
   return (
     <ReactRoutes>
       <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
-      <Route path="/gardens" element={<GardensDropdown isAuthenticated={isAuthenticated} setSelectedGarden={setSelectedGarden} />} />
+      <Route path="/gardens" element={<GardensDropdown isAuthenticated={isAuthenticated} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden} />} />
       <Route path="/garden-map" element={<GardenMap isAuthenticated={isAuthenticated} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden} />} />
       <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} />} />
       <Route path="/register" element={<Register isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated} />} />

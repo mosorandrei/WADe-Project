@@ -1,17 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BOTANICAL_GARDEN_ENDPOINT } from '../constants';
 
 const GardensDropdown = ({isAuthenticated, setSelectedGarden}) => {
-  const gardenNames = ["Garden 1", "Garden 2", "Garden 3"];
-
-  const selectGarden = (event) => {
-    const selectedGarden = event.target.value;
-    setSelectedGarden(selectedGarden);
-  }
+  const [gardenNames, setGardenNames] = useState([]);
+  const [gardensData, setGardensData] = useState({});
+  const fetchGardenNames = async () => {
+    try {
+      const response = await fetch(BOTANICAL_GARDEN_ENDPOINT, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch garden names');
+      }
+      const data = await response.json();
+      setGardensData(data);
+      setSelectedGarden(data[0]);
+      setGardenNames(data.map(item => item.gardenName));
+    } catch (error) {
+      console.error('Error fetching garden names:', error);
+    }
+  };
 
   useEffect(() => {
-    setSelectedGarden(gardenNames[0]);
-  }, [setSelectedGarden]);
+    fetchGardenNames();
+  }, []);
+
+  const pickGarden = (event) => {
+    const selectedGarden = event.target.value;
+    setSelectedGarden(gardensData.find(item => item.gardenName == selectedGarden));
+  };
 
   return (
     isAuthenticated && <div className="max-w-xl mx-auto bg-white p-4 md:p-8 rounded shadow-md" vocab="http://schema.org/">
@@ -21,7 +42,7 @@ const GardensDropdown = ({isAuthenticated, setSelectedGarden}) => {
         <select
           id="gardenSelect"
           className="w-full border-2 border-gray-300 p-2 rounded focus:outline-none focus:ring focus:border-blue-400 mb-10"
-          onChange={selectGarden}
+          onChange={pickGarden}
         >
           <option value="" disabled property="disabled">Select a garden</option>
           {gardenNames.map((garden, index) => (

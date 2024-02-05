@@ -65,7 +65,7 @@ const GardenMatrix = ({ gardenInfo, cellSize }) => {
     row.forEach((cell, j) => {
       if (cell !== null) {
         attractionsSVG.push(createAttractionCircle(i, j, cellSize / 2.5, cellSize / 4, cell));
-        acc.push({ id: cell.id, cx: i * cellSize + cellSize / 2, cy: j * cellSize + cellSize / 2 });
+        acc.push({ id: cell.attractionName, cx: i * cellSize + cellSize / 2, cy: j * cellSize + cellSize / 2 });
       }
     });
     return acc;
@@ -79,7 +79,7 @@ const GardenMatrix = ({ gardenInfo, cellSize }) => {
   }));
 
   for (const tour of coloredTourList) {
-    const attractionIds = tour.attractionIds;
+    const attractionIds = tour.tourAttractionNames;
 
     for (let i = 0; i < attractionIds.length - 1; i++) {
       const attractionId1 = attractionIds[i];

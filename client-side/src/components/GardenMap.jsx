@@ -2,179 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GardenMatrix from './GardenMatrix';
 import ToursPopup from './ToursPopup';
+import { BOTANICAL_GARDEN_ENDPOINT } from '../constants';
 
 const GardenMap = ({isAuthenticated, selectedGarden}) => {
-  const getSelectedGardenInformation = (selectedGardenName) => {
-    return {
-      name: selectedGardenName,
-      attractions: [
-        {
-          id: 1,
-          photo: "fotografie1",
-          name: "nume1",
-          type: "type1",
-          description: "descriere1",
-          comments: [
-            {
-              user: "user1",
-              commentType: "text",
-              commentContent: "comentariu1",
-            },
-            {
-              user: "user2",
-              commentType: "text",
-              commentContent: "comentariu2",
-            }
-          ],
-          reviews: [
-            {
-              user: "user1",
-              commentType: "10"
-            },
-            {
-              user: "user2",
-              rating: "8"
-            }
-          ]
-        },
-        {
-          id: 2,
-          photo: "fotografie2",
-          name: "nume2",
-          type: "type2",
-          description: "descriere2",
-          comments: [
-            {
-              user: "user1",
-              commentType: "text",
-              commentContent: "comentariu1",
-            },
-            {
-              user: "user2",
-              commentType: "text",
-              commentContent: "comentariu2",
-            }
-          ],
-          reviews: [
-            {
-              user: "user1",
-              commentType: "10"
-            },
-            {
-              user: "user2",
-              rating: "8"
-            }
-          ]
-        },
-        {
-          id: 3,
-          photo: "fotografie3",
-          name: "nume3",
-          type: "type3",
-          description: "descriere3",
-          comments: [
-            {
-              user: "user1",
-              commentType: "text",
-              commentContent: "comentariu1",
-            },
-            {
-              user: "user2",
-              commentType: "text",
-              commentContent: "comentariu2",
-            }
-          ],
-          reviews: [
-            {
-              user: "user1",
-              commentType: "10"
-            },
-            {
-              user: "user2",
-              rating: "8"
-            }
-          ]
-        }
-      ],
-      tours: [
-        {
-          id: 1,
-          name: "famous tour2",
-          description: "descriptionTour",
-          guide: "vasile",
-          startHour: "10:00",
-          endHour: "11:00",
-          availablePlaces: 4,
-          attractionIds: [1, 2],
-          comments: [
-            {
-              user: "user1",
-              commentType: "text",
-              commentContent: "AMAZING",
-            },
-            {
-              user: "user2",
-              commentType: "text",
-              commentContent: "STUNNING",
-            }
-          ],
-          reviews: [
-            {
-              user: "user1",
-              commentType: "2"
-            },
-            {
-              user: "user2",
-              rating: "2"
-            }
-          ]
-
-        },
-        {
-          id: 1,
-          name: "famous tour",
-          description: "descriptionTour",
-          guide: "vasile",
-          startHour: "10:00",
-          endHour: "11:00",
-          availablePlaces: 4,
-          attractionIds: [1, 2],
-          comments: [
-            {
-              user: "user1",
-              commentType: "text",
-              commentContent: "AMAZING",
-            },
-            {
-              user: "user2",
-              commentType: "text",
-              commentContent: "STUNNING",
-            }
-          ],
-          reviews: [
-            {
-              user: "user1",
-              commentType: "2"
-            },
-            {
-              user: "user2",
-              rating: "2"
-            }
-          ]
-
-        }
-      ]
-    }
-  }
-
-  const [gardenInfo, setGardenInfo] = useState(null);
   const [cellSize, setCellSize] = useState(180);
   const [showTours, setShowTours] = useState(false);
 
+
+  const [tours, setTours] = useState(selectedGarden.tours);
+
   useEffect(() => {
-    const fetchedGardenInfo = getSelectedGardenInformation(selectedGarden);
-    setGardenInfo(fetchedGardenInfo);
-  }, [selectedGarden]);
+    const fetchGardenTours = async () => {
+      try {
+        const response = await fetch(BOTANICAL_GARDEN_ENDPOINT, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch garden tours');
+        }
+        const data = await response.json();
+        setTours(data.find(item => selectedGarden.gardenName == item.gardenName).tours);
+      } catch (error) {
+        console.error('Error fetching garden tours:', error);
+      }
+    };
+    fetchGardenTours();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -190,9 +46,9 @@ const GardenMap = ({isAuthenticated, selectedGarden}) => {
     };
   }, []);
 
-  return isAuthenticated && gardenInfo && (
+  return isAuthenticated && selectedGarden && (
     <section typeof="bot:Garden">
-      <h2 className="mb-10 text-4xl">Map of <p className='italic mt-2 font-bold text-6xl' property='bot:hasGardenName'>{selectedGarden}</p>
+      <h2 className="mb-10 text-4xl">Map of <p className='italic mt-2 font-bold text-6xl' property='bot:hasGardenName'>{selectedGarden.gardenName}</p>
         <div>
         <Link to="/gardens">
         <button className="mt-10 mr-4">
@@ -208,9 +64,9 @@ const GardenMap = ({isAuthenticated, selectedGarden}) => {
         </button>
         </div>
       </h2>
-      <GardenMatrix gardenInfo={gardenInfo} cellSize={cellSize} />
+      <GardenMatrix gardenInfo={selectedGarden} cellSize={cellSize} />
       <ToursPopup 
-          tours={gardenInfo.tours}
+          tours={tours}
           showTours={showTours}
           onClose={() => setShowTours(false)}
         />

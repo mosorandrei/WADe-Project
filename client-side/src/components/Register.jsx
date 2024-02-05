@@ -27,7 +27,8 @@ const Register = ({ isAuthenticated, setAuthenticated }) => {
         const responseData = await response.json();
         if (response.ok) {
           setAuthenticated(true);
-          Cookies.set('loggedInUserName', responseData.lastName, { expires: Infinity });
+          Cookies.set('loggedInFirstName', responseData.firstName, { expires: Infinity });
+          Cookies.set('loggedInLastName', responseData.lastName, { expires: Infinity });
           navigate("/");
         } else {
           setPossibleErrors(responseData.errorMessage);
@@ -74,17 +75,11 @@ const Register = ({ isAuthenticated, setAuthenticated }) => {
         <div className="flex justify-between items-center mb-4">
           <Link
             to="#"
-            className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2"
+            className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2 mx-auto"
             onClick={registerUser}
           >
             Register Now
           </Link>
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-400 mb-2"
-            onClick={registerUser}
-          >
-            Register with Google
-          </button>
         </div>
       </form>
     </div>

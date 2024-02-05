@@ -4,11 +4,12 @@ import Cookies from 'js-cookie';
 
 const Header = ({ isAuthenticated, setAuthenticated }) => {
   const logout = () => {
-    Cookies.remove('loggedInUserName');
+    Cookies.remove('loggedInFirstName');
+    Cookies.remove('loggedInLastName');
     setAuthenticated(false);
   }
 
-  const loggedInUserName = Cookies.get('loggedInUserName');
+  const loggedInUserName = Cookies.get('loggedInLastName');
   return (
     <header className="bg-green-500 p-4 fixed left-0 top-0 w-full" vocab="http://schema.org/" typeof="WebSite">
       <nav className="flex justify-between items-center">

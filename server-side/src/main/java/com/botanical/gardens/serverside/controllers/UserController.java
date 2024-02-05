@@ -77,6 +77,7 @@ public class UserController {
                 if (PasswordEncryptionTool.checkPassword(password, user.getPassword())) {
 
                     return ResponseEntity.ok(UserDTO.builder()
+                                    .firstName(user.getFirstName())
                             .lastName(user.getLastName())
                             .email(email)
                             .build());
@@ -124,7 +125,7 @@ public class UserController {
                     .password(PasswordEncryptionTool.hashPassword(password))
                     .build());
 
-            return ResponseEntity.ok(UserDTO.builder()
+            return ResponseEntity.ok(UserDTO.builder().firstName(firstName)
                     .lastName(lastName)
                     .email(email)
                     .build());

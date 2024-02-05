@@ -22,7 +22,9 @@ const Login = ({ isAuthenticated, setAuthenticated }) => {
         const responseData = await response.json();
         if (response.ok) {
           setAuthenticated(true);
-          Cookies.set('loggedInUserName', responseData.lastName, { expires: Infinity });
+          console.log(response.firstName);
+          Cookies.set('loggedInFirstName', responseData.firstName, { expires: Infinity });
+          Cookies.set('loggedInLastName', responseData.lastName, { expires: Infinity });
           navigate('/');
         } else {
           setPossibleErrors(responseData.errorMessage);
@@ -52,17 +54,11 @@ const Login = ({ isAuthenticated, setAuthenticated }) => {
         </div>
         <Link
           to="#"
-          className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2"
+          className="bg-green-500 text-white mx-auto py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring focus:border-green-400 mb-2"
           onClick={loginUser}
         >
           Sign In
         </Link>
-        <button
-          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-400 mb-2"
-          onClick={loginUser}
-        >
-          Sign in using Google
-        </button>
       </form>
     </div>
   );
